@@ -20,11 +20,11 @@ class Plants(Resource):
     def get(self):
         plants_list = [plant.to_dict() for plant in Plant.query.all()]
         return make_response(
-            plants_list,
+            jsonify(plants_list),
             200,
         )
         
-    def post():
+    def post(self):
         data = request.get_json()
         new_record = Plant(
             name=data['name'],
@@ -37,7 +37,7 @@ class Plants(Resource):
         response_dict = new_record.to_dict()
         
         return make_response(
-            response_dict,
+            jsonify(response_dict),
             201,
         )
     
@@ -47,7 +47,7 @@ class PlantByID(Resource):
     def get(self):
         response_dict = Plant.query.filter_by(id=id).first().to_dict()
         return make_response(
-            response_dict,
+            jsonify(response_dict),
             200,
         )
         
